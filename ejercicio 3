@@ -1,0 +1,85 @@
+Código Java Fecha
+public class Fecha {
+    private int año;
+    private int mes;
+    private int día;
+
+    // Array para los días de cada mes (febrero varía según si es año bisiesto)
+    private static final int[] DIAS_POR_MES = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    // Constructor
+    public Fecha(int año, int mes, int día) {
+        setFecha(año, mes, día);
+    }
+
+    // Getters
+    public int getAño() {
+        return año;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public int getDía() {
+        return día;
+    }
+
+    // Método para establecer la fecha
+    public void setFecha(int año, int mes, int día) {
+        if (mes < 1 || mes > 12) {
+            throw new IllegalArgumentException("El mes debe estar entre 1 y 12.");
+        }
+        int diasEnMes = diasEnMes(mes, año);
+        if (día < 1 || día > diasEnMes) {
+            throw new IllegalArgumentException("El día debe estar entre 1 y " + diasEnMes + " para el mes " + mes + ".");
+        }
+        this.año = año;
+        this.mes = mes;
+        this.día = día;
+    }
+
+    // Método para saber si el año es bisiesto
+    public boolean esBisiesto() {
+        return (año % 4 == 0 && año % 100 != 0) || (año % 400 == 0);
+    }
+
+    // Método para obtener el número de días en un mes específico
+    private int diasEnMes(int mes, int año) {
+        if (mes == 2 && esBisiesto()) {
+            return 29;
+        }
+        return DIAS_POR_MES[mes - 1];
+    }
+
+    // Método para avanzar un día
+    public void avanzarUnDía() {
+        día++;
+        if (día > diasEnMes(mes, año)) {
+            día = 1;
+            mes++;
+            if (mes > 12) {
+                mes = 1;
+                año++;
+            }
+        }
+    }
+
+    // Método para retroceder un día
+    public void retrocederUnDía() {
+        día--;
+        if (día < 1) {
+            mes--;
+            if (mes < 1) {
+                mes = 12;
+                año--;
+            }
+            día = diasEnMes(mes, año);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%04d-%02d-%02d", año, mes, día);
+    }
+}
