@@ -1,0 +1,74 @@
+CÓDIGO EN JAVA DE LOS EJERCICIOS GUIA 1
+
+public class Fraccionario {
+    private int numerador;
+    private int denominador;
+
+    // Constructor
+    public Fraccionario(int numerador, int denominador) {
+        this.numerador = numerador;
+        if (denominador == 0) {
+            throw new IllegalArgumentException("El denominador no puede ser cero.");
+        }
+        this.denominador = denominador;
+        simplificar();  // Simplifica la fracción al crearla
+    }
+
+    // Getters
+    public int getNumerador() {
+        return numerador;
+    }
+
+    public int getDenominador() {
+        return denominador;
+    }
+
+    // Método para simplificar la fracción
+    private void simplificar() {
+        int gcd = gcd(numerador, denominador);
+        numerador /= gcd;
+        denominador /= gcd;
+    }
+
+    // Método para calcular el máximo común divisor (MCD)
+    private int gcd(int a, int b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
+    }
+
+    // Método para sumar fracciones
+    public Fraccionario sumar(Fraccionario otraFraccion) {
+        int nuevoNumerador = this.numerador * otraFraccion.denominador + this.denominador * otraFraccion.numerador;
+        int nuevoDenominador = this.denominador * otraFraccion.denominador;
+        return new Fraccionario(nuevoNumerador, nuevoDenominador);
+    }
+
+    // Método para restar fracciones
+    public Fraccionario restar(Fraccionario otraFraccion) {
+        int nuevoNumerador = this.numerador * otraFraccion.denominador - this.denominador * otraFraccion.numerador;
+        int nuevoDenominador = this.denominador * otraFraccion.denominador;
+        return new Fraccionario(nuevoNumerador, nuevoDenominador);
+    }
+
+    // Método para multiplicar fracciones
+    public Fraccionario multiplicar(Fraccionario otraFraccion) {
+        int nuevoNumerador = this.numerador * otraFraccion.numerador;
+        int nuevoDenominador = this.denominador * otraFraccion.denominador;
+        return new Fraccionario(nuevoNumerador, nuevoDenominador);
+    }
+
+    // Método para dividir fracciones
+    public Fraccionario dividir(Fraccionario otraFraccion) {
+        if (otraFraccion.numerador == 0) {
+            throw new ArithmeticException("División por cero.");
+        }
+        int nuevoNumerador = this.numerador * otraFraccion.denominador;
+        int nuevoDenominador = this.denominador * otraFraccion.numerador;
+        return new Fraccionario(nuevoNumerador, nuevoDenominador);
+    }
+
+    @Override
+    public String toString() {
+        return numerador + "/" + denominador;
+    }
+}
