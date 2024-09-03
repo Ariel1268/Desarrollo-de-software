@@ -1,0 +1,61 @@
+Código Java Proyectil
+public class Proyectil {
+    private double velocidad;
+    private double ángulo;  // Ángulo en grados
+
+    // Aceleración debida a la gravedad (en m/s^2)
+    private static final double GRAVEDAD = 9.81;
+
+    // Constructor
+    public Proyectil(double velocidad, double ángulo) {
+        setVelocidad(velocidad);
+        setÁngulo(ángulo);
+    }
+
+    // Getters
+    public double getVelocidad() {
+        return velocidad;
+    }
+
+    public double getÁngulo() {
+        return ángulo;
+    }
+
+    // Setters
+    public void setVelocidad(double velocidad) {
+        if (velocidad < 0) {
+            throw new IllegalArgumentException("La velocidad no puede ser negativa.");
+        }
+        this.velocidad = velocidad;
+    }
+
+    public void setÁngulo(double ángulo) {
+        if (ángulo < 0 || ángulo > 90) {
+            throw new IllegalArgumentException("El ángulo debe estar entre 0 y 90 grados.");
+        }
+        this.ángulo = ángulo;
+    }
+
+    // Método para calcular el alcance del proyectil
+    public double calcularAlcance() {
+        double ánguloEnRadianes = Math.toRadians(ángulo);
+        return (Math.pow(velocidad, 2) * Math.sin(2 * ánguloEnRadianes)) / GRAVEDAD;
+    }
+
+    // Método para calcular la altura máxima del proyectil
+    public double calcularAlturaMáxima() {
+        double ánguloEnRadianes = Math.toRadians(ángulo);
+        return (Math.pow(velocidad * Math.sin(ánguloEnRadianes), 2)) / (2 * GRAVEDAD);
+    }
+
+    // Método para calcular el tiempo de vuelo del proyectil
+    public double calcularTiempoDeVuelo() {
+        double ánguloEnRadianes = Math.toRadians(ángulo);
+        return (2 * velocidad * Math.sin(ánguloEnRadianes)) / GRAVEDAD;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Proyectil [velocidad=%.2f m/s, ángulo=%.2f grados]", velocidad, ángulo);
+    }
+}
