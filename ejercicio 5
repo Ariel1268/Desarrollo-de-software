@@ -1,0 +1,94 @@
+Código Java  Tienda
+import java.util.ArrayList;
+import java.util.List;
+
+public class Tienda {
+    private String nombre;
+    private List<Producto> productos;
+
+    // Constructor
+    public Tienda(String nombre) {
+        this.nombre = nombre;
+        this.productos = new ArrayList<>();
+    }
+
+    // Método para agregar un producto
+    public void agregarProducto(Producto producto) {
+        productos.add(producto);
+    }
+
+    // Método para eliminar un producto por su nombre
+    public boolean eliminarProducto(String nombreProducto) {
+        for (Producto producto : productos) {
+            if (producto.getNombre().equalsIgnoreCase(nombreProducto)) {
+                productos.remove(producto);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Método para buscar un producto por su nombre
+    public Producto buscarProducto(String nombreProducto) {
+        for (Producto producto : productos) {
+            if (producto.getNombre().equalsIgnoreCase(nombreProducto)) {
+                return producto;
+            }
+        }
+        return null;  // Retorna null si no se encuentra el producto
+    }
+
+    // Método para mostrar el inventario
+    public void mostrarInventario() {
+        for (Producto producto : productos) {
+            System.out.println(producto);
+        }
+    }
+
+    // Getter para el nombre de la tienda
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "Tienda [nombre=" + nombre + "]";
+    }
+}
+
+// Clase Producto
+class Producto {
+    private String nombre;
+    private double precio;
+    private int cantidad;
+
+    // Constructor
+    public Producto(String nombre, double precio, int cantidad) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+
+    // Getters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    // Setter para la cantidad
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Producto [nombre=%s, precio=%.2f, cantidad=%d]", nombre, precio, cantidad);
+    }
+}
