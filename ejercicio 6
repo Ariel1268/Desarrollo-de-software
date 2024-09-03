@@ -1,0 +1,147 @@
+Código Java  Universidad 
+public class Universidad {
+    private String nombre;
+    private String rector;
+    private String ciudad;
+
+    public Universidad(String nombre, String rector, String ciudad) {
+        this.nombre = nombre;
+        this.rector = rector;
+        this.ciudad = ciudad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getRector() {
+        return rector;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+}
+
+public class Facultad {
+    private String nombre;
+    private int codigo;
+    private List<Carrera> carreras;
+    private List<Profesor> profesores;
+
+    public Facultad(String nombre, int codigo) {
+        this.nombre = nombre;
+        this.codigo = codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public List<Carrera> getCarreras() {
+        return carreras;
+    }
+
+    public List<Profesor> getProfesores() {
+        return profesores;
+    }
+}
+
+public enum NivelCarrera {
+    PREGRADO, POSTGRADO
+}
+
+public class Carrera {
+    private String nombre;
+    private int creditos;
+    private int semestres;
+    private NivelCarrera nivel;
+    private List<Curso> cursos;
+    private List<Estudiante> estudiantes;
+
+    public Carrera(String nombre, int creditos, int semestres, NivelCarrera nivel) {
+        this.nombre = nombre;
+        this.creditos = creditos;
+        this.semestres = semestres;
+        this.nivel = nivel;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public int getSemestres() {
+        return semestres;
+    }
+
+    public NivelCarrera getNivel() {
+        return nivel;
+    }
+
+    public List<Curso> getCursos() {
+        return cursos;
+    }
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+}
+
+public class Curso {
+    private int codigo;
+    private String nombre;
+    private int creditos;
+    private int salon;
+    private String edificio;
+    private List<Profesor> profesores;
+    private List<Estudiante> estudiantes;
+
+    public Curso(int codigo, String nombre, int creditos, int salon, String edificio) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.creditos = creditos;
+        this.salon = salon;
+        this.edificio = edificio;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getCreditos() {
+        return creditos;
+    }
+
+    public int getSalon() {
+        return salon;
+    }
+
+    public String getEdificio() {
+        return edificio;
+    }
+
+    public List<Profesor> getProfesores() {
+        return profesores;
+    }
+
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
+}
+
+public class Profesor extends Persona {
+    private String profesion;
+    private String nacionalidad;
+    private double sueldo;
